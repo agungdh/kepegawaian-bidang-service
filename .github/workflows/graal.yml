@@ -1,0 +1,27 @@
+name: Java CI with GraalVM
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up GraalVM
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'graalvm-ce'
+          java-version: '21'
+          cache: maven
+
+      - name: Install GraalVM native-image
+        run: gu install native-image
+
+      - name: Build with Maven (GraalVM, skip tests)
+        run: mvn -B package --file pom.xml -DskipTests -Pnative
