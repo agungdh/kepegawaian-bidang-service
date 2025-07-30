@@ -9,6 +9,7 @@ jobs:
         with:
           java-version: '21'      # See 'Options' for more details
           distribution: 'liberica' # See 'Supported distributions' for available options
+          cache: maven
       - name: Example step
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
