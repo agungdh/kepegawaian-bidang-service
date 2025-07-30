@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: kepegawaian-bidang-service    # nama aplikasi
+
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=bidang;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: password123!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate                  # validate | update | create | create-drop
+    show-sql: true                      # tampilkan SQL ke console
+    properties:
+      hibernate:
+        format_sql: true                # format rapi SQL di log
+        dialect: org.hibernate.dialect.SQLServerDialect
+
+server:
+  port: 8080                            # port service bidang
