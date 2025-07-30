@@ -12,13 +12,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up GraalVM
-        uses: actions/setup-java@v4
+      - uses: graalvm/setup-graalvm@v1
         with:
-          distribution: 'liberica'
-          java-version: '21'
-          cache: maven
+          java-version: '21'      # See 'Options' for more details
+          distribution: 'liberica' # See 'Supported distributions' for available options
+      - name: Example step
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+      - name: Example step using Maven plugin  # https://graalvm.github.io/native-build-tools/latest/maven-plugin.html
+        run: mvn -Pnative package
 
-      - name: Build with Maven (GraalVM, skip tests)
-        run: mvn -B package --file pom.xml -DskipTests -Pnative
+#      - name: Build with Maven (GraalVM, skip tests)
+#        run: mvn -B package --file pom.xml -DskipTests -Pnative
