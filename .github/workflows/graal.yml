@@ -12,18 +12,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: graalvm/setup-graalvm@v1
+
+      - name: Set up GraalVM CE
+        uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '21'      # See 'Options' for more details
-          distribution: 'liberica' # See 'Supported distributions' for available options
-      - name: Example step
+          java-version: '21'
+          distribution: 'graalvm-ce'    # Ganti dari 'liberica' ke 'graalvm-ce'
+          cache: maven
+
+      - name: Verify GraalVM and native-image
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
+          echo "JAVA_HOME:    $JAVA_HOME"
           java --version
           native-image --version
-      - name: Example step using Maven plugin  # https://graalvm.github.io/native-build-tools/latest/maven-plugin.html
-        run: mvn -Pnative package
 
-#      - name: Build with Maven (GraalVM, skip tests)
-#        run: mvn -B package --file pom.xml -DskipTests -Pnative
+      - name: Build native executable (skip tests)
+        run: mvn -B package --file pom.xml -DskipTests -Pnative
