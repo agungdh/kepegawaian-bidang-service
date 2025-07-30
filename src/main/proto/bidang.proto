@@ -1,6 +1,6 @@
 syntax = "proto3";
 package kepegawaian.bidang;
-option java_package = "id.my.agungdh.kepegawaianbidangservice.grpc";
+option java_package = "id.my.agungdh.kepegawaian-bidang-service.grpc";
 option java_multiple_files = true;
 
 message BidangRequest {
