@@ -1,0 +1,17 @@
+syntax = "proto3";
+package kepegawaian.bidang;
+option java_package = "id.my.agungdh.kepegawaianbidangservice.grpc";
+option java_multiple_files = true;
+
+message BidangRequest {
+  string id = 1;
+  string bidang = 2;
+}
+message BidangResponse {
+  string id = 1;
+  string bidang = 2;
+}
+service BidangService {
+  rpc SaveBidang (BidangRequest) returns (BidangResponse);
+  rpc GetBidang  (BidangRequest) returns (BidangResponse);
+}
